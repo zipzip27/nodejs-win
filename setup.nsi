@@ -1,6 +1,6 @@
-;NSIS Modern User Interface
-;Welcome/Finish Page Example Script
-;Written by Joost Verburg
+;NodeJS Installer Script
+;Written by Bangon Kali.
+;https://code.google.com/p/nodejs-win/
 
 ;--------------------------------
 ;Include Modern UI
@@ -25,12 +25,6 @@
 
   ;Request application privileges for Windows Vista
   RequestExecutionLevel highest
-  
-;--------------------------------
-;LANGUAGES
-
-  :!insertmacro MUI_LANGUAGE "English"
-  LoadLanguageFile "Data\English.nlf"
 
 ;--------------------------------
 ;Version Information
