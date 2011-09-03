@@ -14,8 +14,11 @@
 ;General
 
   ;Name and file
-  Name "NodeJS"
-  OutFile "..\node\node_setup.exe"
+  !define VERSION_NODE "0.5.6"
+  !define VERSION_PACKAGE "4"
+  
+  Name "NodeJS ${VERSION_NODE}.${VERSION_PACKAGE}"
+  OutFile "..\node\node_setup_${VERSION_NODE}.${VERSION_PACKAGE}.exe"
 
   ;Default installation folder
   InstallDir "$PROGRAMFILES\NodeJS"
@@ -29,14 +32,15 @@
 ;--------------------------------
 ;Version Information
 
-  VIProductVersion "1.0.0.1"
-  VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "NodeJS"
+  VIProductVersion "${VERSION_NODE}.${VERSION_PACKAGE}"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "NodeJS ${VERSION_NODE}"
   VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "This is a simple NodeJS Install Package for Windows"
   VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "Joyent"
-  VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalTrademarks" "Node.js is a trademark of Joyent, Inc. See the trademark policy for more information."
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalTrademarks" "Node.js ${VERSION_NODE} is a trademark of Joyent, Inc. See the trademark policy for more information."
   VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright 2010 Joyent, Inc "
-  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "NodeJS is a JavaScript interpreter. Visit NodeJS.org for more information. This is a simple package installer for Windows."
-  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "1.0.0"  
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "NodeJS ${VERSION_NODE} is a JavaScript interpreter. Visit NodeJS.org for more information. This is a simple package installer for Windows."
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${VERSION_NODE}"
+
 
 ;--------------------------------
 ;Variables
