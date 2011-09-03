@@ -1,6 +1,6 @@
 ;NodeJS Installer Script
 ;Written by Bangon Kali.
-;https://code.google.com/p/nodejs-win/
+;https://code.google.com/p/NodeJS-win/
 
 ;--------------------------------
 ;Includes
@@ -15,7 +15,7 @@
 
   ;Name and file
   Name "NodeJS"
-  OutFile "node_setup_win7.exe"
+  OutFile "..\node\node_setup.exe"
 
   ;Default installation folder
   InstallDir "$PROGRAMFILES\NodeJS"
@@ -35,7 +35,7 @@
   VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "Joyent"
   VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalTrademarks" "Node.js is a trademark of Joyent, Inc. See the trademark policy for more information."
   VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright 2010 Joyent, Inc "
-  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "NodeJS is a JavaScript interpreter. Visit nodejs.org for more information. This is a simple package installer for Windows."
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "NodeJS is a JavaScript interpreter. Visit NodeJS.org for more information. This is a simple package installer for Windows."
   VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "1.0.0"  
 
 ;--------------------------------
@@ -83,12 +83,21 @@
 ;Installer Sections
 
 Section "Full Install" SecInstallation
+  SetOverwrite on
 
+   
+  ; Change the output directory to 
   SetOutPath "$INSTDIR"
-
-  ;ADD YOUR OWN FILES HERE...
   File node.exe
-  File /r node_modules
+  
+  SetOutPath "$INSTDIR\node_modules"
+  File /a /r node_modules\*.*
+  
+  ; The go to the documents
+  SetOutPath "$DOCUMENTS\NodeJS\Examples"
+  
+  ; Install the examples folder
+  File /a /r examples\*.*
   
   ;Store installation folder
   WriteRegStr HKCU "Software\NodeJS" "" $INSTDIR
@@ -96,20 +105,22 @@ Section "Full Install" SecInstallation
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   
+  ; Start menu stuff
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     
     ;Create shortcuts
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\NodeJS.lnk" "$INSTDIR\node.exe"
-  
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Examples.lnk" "$DOCUMENTS\NodeJS\Examples"
+    
   !insertmacro MUI_STARTMENU_WRITE_END
   
-  ;Append to Path
+  ; Append to Path
   ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR"
   
   ; set variable
-  WriteRegExpandStr ${env_hklm} "NODE_PATH" "$INSTDIR"
+  WriteRegExpandStr ${env_hklm} "NODE_PATH" "$INSTDIR\node_modules"
   ; make sure windows knows about the change
   SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
   
@@ -147,7 +158,8 @@ Section "Uninstall"
 
   Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\NodeJS.lnk"
-  RMDir "$SMPROGRAMS\$StartMenuFolder"  
+  Delete "$SMPROGRAMS\$StartMenuFolder\Examples.lnk"
+  RMDir "$SMPROGRAMS\$StartMenuFolder"
   
   ;--------------------------------
   ; Delete registry key settings
