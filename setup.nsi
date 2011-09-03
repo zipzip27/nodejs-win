@@ -3,12 +3,12 @@
 ;https://code.google.com/p/nodejs-win/
 
 ;--------------------------------
-;Include Modern UI
+;Includes
    
-  !include "MUI2.nsh"
-  !include "EnvVarUpdate.nsh"
-  !include "winmessages.nsh"
-  
+  !include "MUI2.nsh"            ; Modern UI
+  !include "EnvVarUpdate.nsh"    ; http://j.mp/reuJ0J
+  !include "winmessages.nsh"     ; Environ Variables.
+
   
 ;--------------------------------
 ;General
