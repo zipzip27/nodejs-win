@@ -14,8 +14,8 @@
 ;General
 
   ;Name and file
-  !define VERSION_NODE "0.5.6"
-  !define VERSION_PACKAGE "4"
+  !define VERSION_PACKAGE "5"    ; Installer Version
+  !define VERSION_NODE "0.5.6"   ; NodeJS Version
   
   Name "NodeJS ${VERSION_NODE}.${VERSION_PACKAGE}"
   OutFile "..\node\node_setup_${VERSION_NODE}.${VERSION_PACKAGE}.exe"
@@ -29,6 +29,10 @@
   ;Request application privileges for Windows Vista
   RequestExecutionLevel highest
 
+  ; Compression Method
+  SetCompressor /SOLID lzma
+  SetDatablockOptimize on
+  
 ;--------------------------------
 ;Version Information
 
