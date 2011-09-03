@@ -15,7 +15,7 @@
 
   ;Name and file
   Name "NodeJS"
-  OutFile "node_setup.exe"
+  OutFile "node_setup_win7.exe"
 
   ;Default installation folder
   InstallDir "$PROGRAMFILES\NodeJS"
@@ -109,7 +109,7 @@ Section "Full Install" SecInstallation
   ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR"
   
   ; set variable
-  WriteRegExpandStr ${env_hklm} "NODE_PATH" "$INSTDIR\node_modules"
+  WriteRegExpandStr ${env_hklm} "NODE_PATH" "$INSTDIR"
   ; make sure windows knows about the change
   SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
   
