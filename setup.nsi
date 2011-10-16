@@ -14,7 +14,7 @@
 
   ;Name and file
   !define VERSION_PACKAGE "1"    ; Installer Version
-  !define VERSION_NODE "0.5.8"   ; NodeJS Version
+  !define VERSION_NODE "0.5.9"   ; NodeJS Version
   !define NAME_PACKAGE "NodeJS"  ; Package Name
   
   Name "${NAME_PACKAGE} ${VERSION_NODE}.${VERSION_PACKAGE}"
@@ -108,6 +108,11 @@ Section "Full Install" SecInstallation
   SetOutPath "$INSTDIR"
   File node.exe
   
+  ; Documentation folder
+  SetOutPath "$INSTDIR\documentation"
+  File manual.htm
+  
+  ; Modules folder
   SetOutPath "$INSTDIR\node_modules"
   File /a /r node_modules\*.*
   
@@ -130,6 +135,7 @@ Section "Full Install" SecInstallation
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\${NAME_PACKAGE}.lnk" "$INSTDIR\node.exe"
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\${NAME_PACKAGE} Manual.lnk" "$INSTDIR\documentation\manual.htm"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Examples.lnk" "$DOCUMENTS\${NAME_PACKAGE}\Examples"
     
   !insertmacro MUI_STARTMENU_WRITE_END
@@ -168,6 +174,8 @@ Section "Uninstall"
   Delete "$INSTDIR\node.exe"
   
   RMDir /r "$INSTDIR\node_modules"
+  RMDir /r "$INSTDIR\documentation"
+  
   RMDir "$INSTDIR"
   
   ;--------------------------------
@@ -176,6 +184,7 @@ Section "Uninstall"
 
   Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\${NAME_PACKAGE}.lnk"
+  Delete "$SMPROGRAMS\$StartMenuFolder\${NAME_PACKAGE} Manual.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\Examples.lnk"
   RMDir "$SMPROGRAMS\$StartMenuFolder"
   
