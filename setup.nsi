@@ -13,7 +13,7 @@
 ;General
 
   ;Name and file
-  !define VERSION_PACKAGE "1"    ; Installer Version
+  !define VERSION_PACKAGE "2"    ; Installer Version
   !define VERSION_NODE "0.5.10"   ; NodeJS Version
   !define NAME_PACKAGE "NodeJS"  ; Package Name
   
