@@ -13,8 +13,8 @@
 ;General
 
   ;Name and file
-  !define VERSION_PACKAGE "2"    ; Installer Version
-  !define VERSION_NODE "0.5.10"   ; NodeJS Version
+  !define VERSION_PACKAGE "1"    ; Installer Version
+  !define VERSION_NODE "0.6.0"   ; NodeJS Version
   !define NAME_PACKAGE "NodeJS"  ; Package Name
   
   Name "${NAME_PACKAGE} ${VERSION_NODE}.${VERSION_PACKAGE}"
@@ -111,6 +111,9 @@ Section "Full Install" SecInstallation
   ; Documentation folder
   SetOutPath "$INSTDIR\documentation"
   File manual.htm
+  
+  SetOutPath "$INSTDIR\documentation\manual_files"
+  File /a /r manual_files\*.* ; Manual Associated files
   
   ; Modules folder
   SetOutPath "$INSTDIR\node_modules"
