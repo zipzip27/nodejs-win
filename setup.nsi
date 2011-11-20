@@ -14,7 +14,7 @@
 
   ;Name and file
   !define VERSION_PACKAGE "1"    ; Installer Version
-  !define VERSION_NODE "0.6.1"   ; NodeJS Version
+  !define VERSION_NODE "0.6.2"   ; NodeJS Version
   !define NAME_PACKAGE "NodeJS"  ; Package Name
   
   Name "${NAME_PACKAGE} ${VERSION_NODE}.${VERSION_PACKAGE}"
