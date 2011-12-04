@@ -14,7 +14,7 @@
 
   ;Name and file
   !define VERSION_PACKAGE "1"    ; Installer Version
-  !define VERSION_NODE "0.6.3"   ; NodeJS Version
+  !define VERSION_NODE "0.6.5"   ; NodeJS Version
   !define NAME_PACKAGE "NodeJS"  ; Package Name
   
   Name "${NAME_PACKAGE} ${VERSION_NODE}.${VERSION_PACKAGE}"
@@ -107,6 +107,7 @@ Section "Full Install" SecInstallation
   ; Change the output directory to 
   SetOutPath "$INSTDIR"
   File node.exe
+  File npm.cmd
   
   ; Documentation folder
   SetOutPath "$INSTDIR\documentation"
@@ -175,6 +176,7 @@ Section "Uninstall"
 
   Delete "$INSTDIR\Uninstall.exe"
   Delete "$INSTDIR\node.exe"
+  Delete "$INSTDIR\npm.cmd"
   
   RMDir /r "$INSTDIR\node_modules"
   RMDir /r "$INSTDIR\documentation"
